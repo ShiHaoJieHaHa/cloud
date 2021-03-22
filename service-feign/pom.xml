@@ -12,8 +12,8 @@
 
 
 	<parent>
-		<groupId>com.forezp</groupId>
-		<artifactId>sc-f-chapter1</artifactId>
+		<groupId>com.cloud</groupId>
+		<artifactId>cloud</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
