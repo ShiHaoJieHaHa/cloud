@@ -1,5 +1,6 @@
 package own.controller;
 
+import own.config.ApiControllerAdvice;
 import own.pojo.Person;
 import own.service.PersonService;
 import org.slf4j.Logger;
@@ -8,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import own.utils.AtomicCounter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -17,6 +22,7 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+
     @GetMapping("/save")
     public Person getSavePerson(Person person) {
         Person p = personService.save(person);
@@ -25,10 +31,14 @@ public class PersonController {
     }
 
     @GetMapping("/get/{id}")
-    public Person getPersonInfo(@PathVariable Long id) {
+    public Map<String, Object> getPersonInfo(@PathVariable Long id) {
         Person p = personService.getPersonInfor(id);
-        logger.info("调用查询get方法中---------");
-        return p;
+        // System.out.println(AtomicCounter.getInstance().getValue()+"-------------------");
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", AtomicCounter.getInstance().getValue());
+        map.put("person", p);
+        logger.info("调用查询get方法中");
+        return map;
     }
 
 
